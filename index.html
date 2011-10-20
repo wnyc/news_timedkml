@@ -4,8 +4,9 @@
   <script src="lib/jquery.min.js"></script>
   <script src="lib/jquery-ui.min.js"></script>
   <script src="lib/OpenLayers-min.js"></script>
-<!script src="http://maps.google.com/maps/api/js?sensor=false"></script-->
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script src="jquery-ui.labeled-slider/jquery-ui.labeled-slider.js"></script>
+  <script src="timedkml.js"></script>
   <link rel="stylesheet" href="jqueryui/jquery-ui.css" type="text/css" />
   <link rel="stylesheet" href="lib/openlayers/openlayers/theme/default/style.css" type="text/css" />
   <link rel="stylesheet" href="lib/openlayers/openlayers/theme/default/google.css" type="text/css" />
@@ -35,12 +36,11 @@
     var layers = [];
     var osm = new OpenLayers.Layer.OSM();
     layers.push(osm);
-    /*
     var gmap;
     if (window.google) {
       gmap = new OpenLayers.Layer.Google("Google Streets", {visibility: false});
       layers.push(gmap);
-    }*/
+    }
     var kml1 = new OpenLayers.Layer.Vector("KML", {
             strategies: [new OpenLayers.Strategy.Fixed()],
             protocol: new OpenLayers.Protocol.HTTP({
