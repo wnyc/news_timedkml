@@ -19,13 +19,15 @@
   jQuery(function() {
     window.widget = new TimedKML().init({
       map:{
-        center:{lat:90,lng:90},
-        zoom:7,
+        //http://maps.google.com/?ll=41.244772,-103.974609&spn=16.33865,32.607422&t=m&z=5&vpsrc=6
+        center:{ lon:41.244772, lat:-103.974609 },
+        zoom:5,
         mapping_service:'google',
         html_id:'map'
       },
       slider:{
-        html_id:'slider'
+        html_id:'slider',
+        play_button_id:'play_btn'
       },
       sequence:[
         {kml:'samples/1.kml',label:'1/1/11'},
@@ -37,6 +39,7 @@
   </script>
 </head>
 <body>
+  <div id="play_btn">play</div>
   <div id="slider"></div>
   <div id="map" style="width:500px;height:500px;"></div>
   <ul>
