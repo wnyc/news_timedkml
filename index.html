@@ -11,17 +11,18 @@
   <link rel="stylesheet" href="lib/openlayers/openlayers/theme/default/style.css" type="text/css" />
   <link rel="stylesheet" href="lib/openlayers/openlayers/theme/default/google.css" type="text/css" />
   <script>
-    OpenLayers.ImgPath = 'lib/openlayers/openlayers/img/';
+    OpenLayers.ImgPath = 'lib/openlayers/img/';
     OpenLayers._getScriptLocation = function() {
-       return "lib/openlayers/openlayers/";
+       return "lib/openlayers/";
     };
 
   jQuery(function() {
     window.widget = new TimedKML().init({
       map:{
-        //http://maps.google.com/?ll=41.244772,-103.974609&spn=16.33865,32.607422&t=m&z=5&vpsrc=6
-        center:{ lon:41.244772, lat:-103.974609 },
-        zoom:5,
+        //USA center
+        center:{ lon:-97.53711,lat:38.77477 }, zoom:4,
+        //nyc 
+        //center:{ lon:-73.93799,lat:40.80056 }, zoom:10,
         mapping_service:'google',
         html_id:'map'
       },
@@ -32,7 +33,8 @@
       sequence:[
         {kml:'samples/1.kml',label:'1/1/11'},
         {kml:'samples/2.kml',label:'1/2/11'},
-        {kml:'samples/3.kml',label:'1/3/11'}
+        {kml:'samples/3.kml',label:'1/3/11'},
+        {kml:'samples/4.kml',label:'1/3/11'}
       ]
     });
   });
@@ -41,7 +43,7 @@
 <body>
   <div id="play_btn">play</div>
   <div id="slider"></div>
-  <div id="map" style="width:500px;height:500px;"></div>
+  <div id="map" style="width:700px;height:400px;"></div>
   <ul>
     <li>TODO
     <li>play button

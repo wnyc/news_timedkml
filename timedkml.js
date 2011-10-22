@@ -6,6 +6,7 @@
         {kml:'samples/3.kml',label:'1/3/11'}
       ]
     });
+http://maps.google.com/maps/ms?msid=213867976129542294923.0004afaf419d3f7e22e86&msa=0&ll=48.864715,-116.191406&spn=27.590947,62.929688
 */
 
 function TimedKML(){}
@@ -15,16 +16,21 @@ TimedKML.prototype = {
 
         this.map = new OpenLayers.Map({
             div: opts.map.html_id,
-            allOverlays: true
+            allOverlays: true,
+//projection: new OpenLayers.Projection("EPSG:900913"),
+  displayProjection: new OpenLayers.Projection("EPSG:4326")
         });
         this.layers = [];
         //var osm = new OpenLayers.Layer.OSM();
         //layers.push(osm);
         var gmap;
         if (opts.map.mapping_service=='google') {
-            this.bg_layer = new OpenLayers.Layer.Google("Google Streets", 
-                                               {visibility: true});
+            this.bg_layer = new OpenLayers.Layer.Google(
+                "Google Streets", 
+                {visibility: true
+                });
         }
+
         this.addSequence(opts.sequence);
         this.createSlider(opts);
         // note that first layer must be visible
@@ -32,15 +38,22 @@ TimedKML.prototype = {
         this.map.addLayers(this.layers);
 
         //this.map.addControl(new OpenLayers.Control.LayerSwitcher());
-        //this.map.zoomToMaxExtent();
+	this.map.addControl(new OpenLayers.Control.MousePosition());
+
         var center = opts.map.center;
         if (center) {
             console.log(center);
-            this.map.setCenter(new OpenLayers.LonLat(center.lon, center.lat), 
-                               opts.map.zoom );
+            this.setCenterLonLat(center.lon,center.lat,opts.map.zoom);
         }
+
         this.next(0);
         return this;
+    },
+    setCenterLonLat:function(lon,lat,zoom) {
+        var proj = new OpenLayers.Projection("EPSG:4326");
+        var point = new OpenLayers.LonLat(lon, lat);
+        var tp = point.transform(proj, this.map.getProjectionObject());
+        this.map.setCenter(tp,zoom);
     },
     play:function(reset,speed) {
         var self = this;
