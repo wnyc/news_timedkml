@@ -42,7 +42,6 @@ TimedKML.prototype = {
 
         var center = opts.map.center;
         if (center) {
-            console.log(center);
             this.setCenterLonLat(center.lon,center.lat,opts.map.zoom);
         }
 
@@ -50,6 +49,7 @@ TimedKML.prototype = {
         return this;
     },
     setCenterLonLat:function(lon,lat,zoom) {
+        //http://docs.openlayers.org/library/spherical_mercator.html
         var proj = new OpenLayers.Projection("EPSG:4326");
         var point = new OpenLayers.LonLat(lon, lat);
         var tp = point.transform(proj, this.map.getProjectionObject());
@@ -61,7 +61,6 @@ TimedKML.prototype = {
         speed = speed || 1000;
         var start = (reset) ? -1 : this.cur_index;
         var timedNext = function() {
-            console.log(start);
             if (self.keep_playing && start<self.layers.length-1) {
                 self.next(++start);
                 setTimeout(timedNext,speed);
